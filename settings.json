@@ -1,0 +1,5 @@
+{
+    "MONGO_URL":"mongodb://sunsama:suncitygetsin2015@mongo-sunsama-prod-7.siftnet.6978.mongodbdns.com:27000,mongo-sunsama-prod-8.siftnet.6978.mongodbdns.com:27000,mongo-sunsama-prod-9.siftnet.6978.mongodbdns.com:27000/sunsama_prod?replicaSet=sunsama",
+    "MONGO_OPLOG_URL":"mongodb://oplogger:sungetsin2015@mongo-sunsama-prod-7.siftnet.6978.mongodbdns.com:27000,mongo-sunsama-prod-8.siftnet.6978.mongodbdns.com:27000,mongo-sunsama-prod-9.siftnet.6978.mongodbdns.com:27000/local?replicaSet=sunsama&authSource=admin",
+    "ALT_MONGO_URL":"mongodb://sunsama:suncitypdx2015@mongo-sunsama-prod-7.siftnet.6978.mongodbdns.com:27000,mongo-sunsama-prod-8.siftnet.6978.mongodbdns.com:27000,mongo-sunsama-prod-9.siftnet.6978.mongodbdns.com:27000/sunsama_alt?replicaSet=sunsama"
+}

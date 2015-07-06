@@ -42,5 +42,10 @@ Meteor.methods({
     },
     totalConfirmedConnections:function() {
         return UserEdges.find({status:"confirmed"}).count();
+    },
+    test:function(){
+        console.log(Meteor.settings.MONGO_URL);
+        console.log(Meteor.settings.MONGO_OPLOG_URL);
+        console.log(Meteor.users.find().fetch().length);
     }
 })

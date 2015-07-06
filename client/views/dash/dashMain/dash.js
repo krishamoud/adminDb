@@ -34,6 +34,10 @@ var mapDict = {
 Template.dash.onCreated(function(){
     var self = this;
     self.subscribe("userData");
+    self.autorun(function(){
+        var status = Meteor.status();
+        console.log(status);
+    })
 
 })
 
@@ -145,5 +149,5 @@ Template.dash.helpers({
         });
         return Session.get(username) ? Session.get(username).invitesSent : 0;
     },
-    
+
 })
