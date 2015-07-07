@@ -13,6 +13,13 @@ Meteor.methods({
                 {$group: {_id: null, timeData: {$push: "$_id"}, usersByDay: {$push: "$usersByDay"}, totalUsers: {$sum: "$usersByDay"}}}
             ])
     },
+    userDataByWeek:function(){
+        return Meteor.users.aggregate([
+            {$group: {_id: {year: {$year: "$createdAt"}, month: {$month: "$createdAt"}, week: {$week:"$createdAt"}}, usersByWeek: {$sum: 1}}},
+            {$sort: {"_id.year": 1, "_id.month": 1,"_id.week":1}},
+            {$group: {_id: null, timeData: {$push: "$_id"}, usersByWeek: {$push: "$usersByWeek"}, totalUsers: {$sum: "$usersByWeek"}}}
+        ])
+    },
     getUserContactLength:function(nodeId){
         return UserEdges.find({$or:[{vertexStart: nodeId}, {vertexEnd:nodeId}], isContact:true}).count();
     },
@@ -46,6 +53,7 @@ Meteor.methods({
     test:function(){
         console.log(Meteor.settings.MONGO_URL);
         console.log(Meteor.settings.MONGO_OPLOG_URL);
+        console.log(PublicBookings.findOne());
         console.log(Meteor.users.find().fetch().length);
     }
 })

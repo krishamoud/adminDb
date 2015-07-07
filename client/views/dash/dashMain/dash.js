@@ -34,11 +34,6 @@ var mapDict = {
 Template.dash.onCreated(function(){
     var self = this;
     self.subscribe("userData");
-    self.autorun(function(){
-        var status = Meteor.status();
-        console.log(status);
-    })
-
 })
 
 
@@ -50,6 +45,8 @@ Template.dash.onRendered(function() {
     var monthArr = [];
     var dayArr = [];
     var data2Arr = [];
+    var weekArr = [];
+    var data3Arr = [];
     Meteor.call("userData", function(err,res){
         if(!err && res){
             var usersByMonth = res[0].timeData;
@@ -98,6 +95,36 @@ Template.dash.onRendered(function() {
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(151,187,205,1)",
                         data: data2Arr
+                    }
+                ]
+            }
+            var myLineChart = new Chart(ctx).Line(data, {responsive:true, datasetFill:false});
+        }
+    });
+
+    Meteor.call("userDataByWeek", function(err,res){
+        if(!err && res){
+            var usersByWeek = res[0].usersByWeek;
+            var timeData = res[0].timeData;
+            usersByWeek.forEach(function(week, idx){
+                week.usersAdded = res[0].usersByWeek[idx]
+                data3Arr.push(week);
+                var weekNo = timeData[idx].week;
+                weekArr.push("Month: " + mapDict[timeData[idx].month] + ", week: " + idx);
+            })
+            var ctx = document.getElementById("userChartByWeek").getContext("2d");
+            var data = {
+                labels: weekArr,
+                datasets: [
+                    {
+                        label: "My Second dataset",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: data3Arr
                     }
                 ]
             }

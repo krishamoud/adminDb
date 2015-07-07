@@ -6,6 +6,7 @@
 
 standard-app-packages
 http
+accounts-base
 accounts-password
 underscore
 google
